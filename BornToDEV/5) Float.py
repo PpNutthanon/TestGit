@@ -1,0 +1,6 @@
+print(type(5.87))
+print(10+5.87)
+print(type(10+3.0))
+print(type(10-3.0))
+print(type(5*1.0))
+print(type(-15.1*2))
