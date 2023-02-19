@@ -1,7 +1,6 @@
 ''''
-#This is my First Program
-'''
-print(10+10+1)
+#! This is my First Program
+'''''
 print("-------------------------") 
 print("Pp Shop VAT Invoice")
 print("-------------------------")
