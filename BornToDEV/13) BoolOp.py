@@ -1,4 +1,4 @@
-# Boolean Operators => and, or, <, >, <=, >=, =
+# Boolean Operators => and, or, <, >, <=, >=, ==, != 
 x = True
 y = False
 z = x > y
