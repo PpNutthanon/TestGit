@@ -1,6 +1,6 @@
 print("Program Create Triangle")
 print("-------------------------------")
 number = int(input("Enter The Level of Triangle :"))
-text = ""
-for i in range(number):
-    print("*"* ((2*i)+1))
+for i in range(1,number):
+        print(" "*(number-i)+"*"*((2*i)-1))
+        
