@@ -7,3 +7,8 @@ for i in range(number):
     text = text+"*"
     print(text)
 
+for x in range(number):
+    text = ""
+    for y in range(x+1):
+        text += "*"
+    print(text)
