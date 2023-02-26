@@ -1,3 +1,4 @@
+# Return => เป็นการส่งค่าคืนกลับมายังฟังก์ชันตัวนั้น
 def sayHello(name):
     return "Hello "+name
 
