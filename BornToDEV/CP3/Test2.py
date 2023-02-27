@@ -24,3 +24,4 @@ def priceCalculator():
     price1 = int(input("First Product Price : "))
     price2 = int(input("Second Product Price : "))
     return vatCalculator(price1 + price2)
+
