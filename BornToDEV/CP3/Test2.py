@@ -12,7 +12,7 @@ def showMenu():
     print("2. Price Calculator")
 
 def menuSelect():
-    userSelected = int(input(">>"))
+    userSelected = int(input("Which Choices :"))
     return userSelected
 
 def vatCalculator(totalPrice):
@@ -25,3 +25,13 @@ def priceCalculator():
     price2 = int(input("Second Product Price : "))
     return vatCalculator(price1 + price2)
 
+if login() == True:
+    showMenu()
+    if menuSelect() == 1:
+        print(priceCalculator())
+    elif menuSelect() == 2:
+        pass
+    else:
+        print("Error")
+else:
+    print("Incorrect Username or Password")
