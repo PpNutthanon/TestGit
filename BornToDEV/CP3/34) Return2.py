@@ -1,6 +1,5 @@
 def VAT(totalprice):
-    result = totalprice*1.07
-    return result
+    return totalprice*1.07
 totalprice = float(input("Enter Price :"))
 print("Price include VAT :",VAT(totalprice))
     
