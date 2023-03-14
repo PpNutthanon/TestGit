@@ -1,10 +1,12 @@
 menulist = []
-
-
 def Invoice():
-    print("---------My Food Invoice----------")
+    print("---------Food Invoice----------")
+    sum = 0
     for number in range(0,len(menulist)):
-        print(menulist[number])
+        print(menulist[number][0], menulist[number][1])
+        sum += menulist[number][1]
+    print("Total Price:", sum)
+
 
 while True:
     menu = input("Please Enter Your Menu: ")
@@ -14,5 +16,6 @@ while True:
         price = int(input("Enter Price: "))
         menulist.append([menu,price])
 
+print(menulist[0][1]+menulist[1][1])
 print(menulist)
 Invoice()
