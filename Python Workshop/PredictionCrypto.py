@@ -5,6 +5,7 @@ import pandas as pd
 import pandas_datareader as web
 import matplotlib.pyplot as plt
 
+
 #? Import Deep Learning To IDE
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.layers import Dense, Dropout, LSTM
