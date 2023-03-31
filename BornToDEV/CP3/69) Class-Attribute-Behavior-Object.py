@@ -24,7 +24,7 @@ customer2.age = 20
 customer3  = Customer() #Object
 customer3.name = "Sine"
 customer3.lastname = "Apatcha"
-customer3.age = 58
+customer3.age = 23
 
 customer4  = Customer() #Object
 customer4.name = "Pun"
