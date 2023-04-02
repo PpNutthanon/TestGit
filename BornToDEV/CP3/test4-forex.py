@@ -36,3 +36,29 @@ print(b.convert_to_btc(5000,"USD"))
 
 # Todo Convert amount BTC based on previous date price
 print(b.convert_to_btc_on(5000, 'USD', date_obj))
+
+# Todo Convert BTC to Valid currency amount based on lates prices
+print(b.convert_btc_to_cur(1.25,"USD"))
+
+# Todo Convert BTC to valid currency amount based on previous date price
+date_obj3 = datetime.datetime(2016,5,18,19,38,36,815417)
+print(b.convert_btc_to_cur_on(1.25,"EUR", date_obj3))
+
+# Todo Get list of prices list for given date range
+start_date = datetime.datetime(2016,5,18,19,39,36,81547)
+end_date = datetime.datetime(2016,5,23,19,39,36,815417)
+print(b.get_previous_price_list("BTC",start_date, end_date))
+
+# Todo Get BTC Symbol or any Currency symbol
+print(b.get_symbol())
+
+# Todo Get Currency Symbol and Name using currency code
+from forex_python.converter import CurrencyCodes
+d = CurrencyCodes()
+print(d.get_symbol("EUR"))
+print(d.get_currency_name("EUR"))
+
+
+#! Find Return on Investment If You Start Invest in BTC from __ to __
+
+#! Forex Trading Simulation
