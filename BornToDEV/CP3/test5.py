@@ -9,6 +9,7 @@ import datetime
 
 # Todo Input the start_date and end_date
 print("- Please Enter The date Ex.21/05/2023")
+print("- Please Enter The currency Ex. USD,GBP,THB ..etc..")
 print("- The latest update date is 18/07/2010 - 10/07/2022","\n")
 start = input("Enter the date you start trading: ")
 end = input("Enter the date you end trading: ")
