@@ -34,10 +34,20 @@ print("BTC price you bought: ", btc_converter.get_previous_price(currency, start
 print("BTC price you sold  : ", btc_converter.get_previous_price(currency, end_date), currency_code.get_symbol(currency))
 print(btc_converter.get_previous_price(currency, end_date)/btc_converter.get_previous_price(currency, start_date))
 
+# Todo Calculate profit/loss percentages and total balance
+profit_loss_percentage = ((end_price - start_price) / start_price) * 100
+total_balance = (capital_cost*profit_loss_percentage)/100
+
 # Todo Check if both prices are not None and calculate the percent profit/loss
 if start_price is not None and end_price is not None:
-    profit_loss_percentage = ((end_price - start_price) / start_price) * 100  
-    print("Profit/Loss Percentage:", profit_loss_percentage)
+    print("Your Capital Cost: ", capital_cost, currency_code.get_symbol(currency))
+    print("Total Balance: ", total_balance, currency_code.get_symbol(currency)) 
+    if profit_loss_percentage > 100:
+        print("Profit: ", total_balance-capital_cost, currency_code.get_symbol(currency))
+    elif profit_loss_percentage <100:
+        print("Loss: ", capital_cost-total_balance, currency_code.get_symbol(currency))
+    else:
+        print("Breakeven")
 else:
     print("Prices for the given dates are not available.")
 
