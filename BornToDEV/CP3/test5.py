@@ -39,7 +39,7 @@ profit_loss_percentage = round((end_price/start_price), 4)
 total_balance = round((capital_cost*profit_loss_percentage), 2)
 
 # Todo Check if both prices are not None and calculate the return on investment
-print("--------Results--------")
+print("----------Results----------")
 if start_price is not None and end_price is not None:
     print("Capital Cost: ", capital_cost, currency_code.get_symbol(currency))
     print("Total Balance: ", total_balance, currency_code.get_symbol(currency)) 
