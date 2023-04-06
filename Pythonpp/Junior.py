@@ -18,21 +18,21 @@ while True:
     if key == 27:  # ESC
         break
     elif key == ord('w'):
-        tello.move_forward(30)
+        tello.move_forward(50)
     elif key == ord('s'):
-        tello.move_back(30)
+        tello.move_back(50)
     elif key == ord('a'):
-        tello.move_left(30)
+        tello.move_left(50)
     elif key == ord('d'):
-        tello.move_right(30)
+        tello.move_right(50)
     elif key == ord('e'):
-        tello.rotate_clockwise(30)
+        tello.rotate_clockwise(50)
     elif key == ord('q'):
-        tello.rotate_counter_clockwise(30)
+        tello.rotate_counter_clockwise(50)
     elif key == ord('r'):
-        tello.move_up(30)
+        tello.move_up(50)
     elif key == ord('f'):
-        tello.move_down(30)
+        tello.move_down(50)
 
 tello.land()
 cv2.destroyAllWindows()
