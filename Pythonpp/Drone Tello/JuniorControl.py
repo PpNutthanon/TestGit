@@ -1,5 +1,6 @@
 from djitellopy import Tello
 import cv2
+import time 
 
 tello = Tello()
 tello.connect()
@@ -33,6 +34,6 @@ while True:
         tello.move_up(50)
     elif key == ord('f'):
         tello.move_down(50)
-
+        
 tello.land()
 cv2.destroyAllWindows()
