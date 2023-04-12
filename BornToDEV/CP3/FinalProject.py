@@ -19,8 +19,8 @@ def organize_files(path): #Todo: Create function that input the path which path 
     for file in os.listdir(path): #Todo: ให้ file เป็น lists ของ Folder,files ทั้งหมดที่อยู่ใน path
         file_path = os.path.join(path, file) 
 
-        if os.path.isfile(file_path):
-            file_extension = os.path.splitext(file)[1].lower()
+        if os.path.isfile(file_path): #Todo Check ว่าภายใน file_path มีอะไรที่เป็นไฟล์มั้ย
+            file_extension = os.path.splitext(file)[1].lower() #Todo: ให้แยกไฟล์ย่อยๆภายในออกมา .lower()เพราะจะได้แยกประเภทจากชื่อไฟล์ได้
 
             if file_extension in file_categories:
                 category = file_categories[file_extension]

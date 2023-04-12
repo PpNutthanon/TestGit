@@ -5,4 +5,3 @@ dir_contents = os.listdir(dir_path)
 # print the contents of the directory
 print(dir_contents)
 
-
