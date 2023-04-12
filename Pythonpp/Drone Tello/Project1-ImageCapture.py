@@ -1,12 +1,15 @@
 from djitellopy import tello
 import Keypress as kp
-from time import sleep
+import time
+import cv2
 
-kp.init()
 drone = tello.Tello()
 drone.connect()
 print(drone.get_battery())
+global img
 
+
+drone.streamon()
 
 def getKeyboardInput():
         lr, fb, ud, yv, = 0, 0, 0, 0
@@ -23,14 +26,21 @@ def getKeyboardInput():
         if kp.getkey("a"): yv = -speed
         elif kp.getkey("d"): yv = speed
 
-        if kp.getkey("q"): yv = drone.land(); sleep(3)
+        if kp.getkey("q"): yv = drone.land(); time.sleep(3)
         if kp.getkey("e"): yv = drone.takeoff()
+
+        if kp.getkey("z"): 
+              cv2.imwrite(f"Resourses/Images/{time.time()}.jpg",img) #Todo Save Image
+              time.sleep(0.3)
 
         return [lr, fb, ud, yv]
 
     
 
 while True:
-        vals = getKeyboardInput()
-        drone.send_rc_control(vals[0],vals[1],vals[2],vals[3])
-        sleep(0.05)
+    vals = getKeyboardInput()
+    drone.send_rc_control(vals[0],vals[1],vals[2],vals[3])
+    img = drone.get_frame_read().frame
+    img = cv2.resize(img,(360,240)) # Todo Resize the image 
+    cv2.imshow("Drone Image",img)
+    cv2.waitKey(1) #The Frame will shutdown immediately if we don't write this code
