@@ -4,24 +4,29 @@ def init():
     pygame.init()
     win = pygame.display.set_mode((400, 400))
 
-def getkey(keyname):
+
+def getKey(keyName):
     ans = False
     for eve in pygame.event.get(): pass
-    keyinput = pygame.key.get_pressed()
-    mykey = getattr(pygame,"K_{}".format(keyname))
-    if keyinput[mykey]:
+    keyInput = pygame.key.get_pressed()
+    myKey = getattr(pygame, 'K_{}'.format(keyName))
+    print('K_{}'.format(keyName))
+
+    if keyInput[myKey]:
         ans = True
-    pygame.display.update() 
+    pygame.display.update()
     return ans
 
+
 def main():
-    if getkey("LEFT"):
-        print("Left Key Pressed")
-    if getkey("RIGHT"):
+    if getKey("LEFT"):
+        print("Left key pressed")
+
+    if getKey("RIGHT"):
         print("Right key Pressed")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     init()
     while True:
         main()
