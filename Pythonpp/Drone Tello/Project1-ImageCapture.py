@@ -3,44 +3,57 @@ import Keypress as kp
 import time
 import cv2
 
-drone = tello.Tello()
-drone.connect()
-print(drone.get_battery())
+kp.init()
+me = tello.Tello()
+me.connect()
+print(me.get_battery())
 global img
-
-
-drone.streamon()
+me.streamon()
 
 def getKeyboardInput():
-        lr, fb, ud, yv, = 0, 0, 0, 0
-        speed = 50
-        if kp.getkey("LEFT"): lr = -speed
-        elif kp.getkey("RIGHT"): lr = speed
+    lr, fb, ud, yv = 0, 0, 0, 0
+    speed = 50
 
-        if kp.getkey("UP"): fb = speed
-        elif kp.getkey("DOWN"): fb = -speed
+    if kp.getKey("LEFT"):
+        lr = -speed
 
-        if kp.getkey("w"): ud = speed
-        elif kp.getkey("s"): ud = -speed
+    elif kp.getKey("RIGHT"):
+        lr = speed
 
-        if kp.getkey("a"): yv = -speed
-        elif kp.getkey("d"): yv = speed
+    if kp.getKey("UP"):
+        fb = speed
 
-        if kp.getkey("q"): yv = drone.land(); time.sleep(3)
-        if kp.getkey("e"): yv = drone.takeoff()
+    elif kp.getKey("DOWN"):
+        fb = -speed
 
-        if kp.getkey("z"): 
-              cv2.imwrite(f"Resourses/Images/{time.time()}.jpg",img) #Todo Save Image
-              time.sleep(0.3)
+    if kp.getKey("w"):
+        ud = speed
 
-        return [lr, fb, ud, yv]
+    elif kp.getKey("s"):
+        ud = -speed
 
-    
+    if kp.getKey("a"):
+        yv = -speed
+
+    elif kp.getKey("d"):
+        yv = speed
+
+    if kp.getKey("q"): me.land(); time.sleep(3)
+
+    if kp.getKey("e"):  me.takeoff()
+
+    if kp.getKey("z"):
+        cv2.imwrite(f'Resources/Images/{time.time()}.jpg', img)
+
+        time.sleep(0.3)
+
+    return [lr, fb, ud, yv]
+
 
 while True:
     vals = getKeyboardInput()
-    drone.send_rc_control(vals[0],vals[1],vals[2],vals[3])
-    img = drone.get_frame_read().frame
-    img = cv2.resize(img,(360,240)) # Todo Resize the image 
-    cv2.imshow("Drone Image",img)
-    cv2.waitKey(1) #The Frame will shutdown immediately if we don't write this code
+    me.send_rc_control(vals[0], vals[1], vals[2], vals[3])
+    img = me.get_frame_read().frame
+    img = cv2.resize(img, (360, 240))
+    cv2.imshow("Image", img)
+    cv2.waitKey(1)
