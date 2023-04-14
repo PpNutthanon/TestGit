@@ -28,14 +28,15 @@ def threshoulding(img):
     return mask
 
 def getCountours(imgThres, img):
-
+    cx = 0
     contours, hieracrchy = cv2.findContours(imgThres, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    biggest = max(contours, key=cv2.contourArea)
-    x, y, w, h = cv2.boundingRect(biggest)
-    cx = x + w//2
-    cy = y + h//2
-    cv2.drawContours(img, biggest, -1, (255,0,255), 7)
-    cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
+    if len(contours) != 0:
+        biggest = max(contours, key=cv2.contourArea)
+        x, y, w, h = cv2.boundingRect(biggest)
+        cx = x + w//2
+        cy = y + h//2
+        cv2.drawContours(img, biggest, -1, (255,0,255), 7)
+        cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
     return cx
 
 def getSensorOutput(imgThres, sensors):
