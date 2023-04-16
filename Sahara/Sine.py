@@ -19,7 +19,7 @@ if 1 <= data <= 6:
     values = find_values(data)
     if len(values) == 0:
         print("Required Equation")
-        #Todo: เอาสูตรเข้ามาคำนวณ
+        #Todo: เอาสูตรเข้ามาคำนวณ => save ค่า row+1 and row-1 เก็บไว้ในตัวแปร 2 ตัว
     else:
         print(values)
         #Todo: ลบให้output ไม่แสดง row(ไม่ทำก็ได้)
