@@ -1,6 +1,6 @@
 # Import excel sheet into python
 import pandas as pd
-df = pd.read_excel(r"Sahara\TableA17.xlsx")
+df = pd.read_excel(r"Sahara\TableA17.xlsx") #!: เปลี่ยนเป็น ชื่อFolderที่ซาฮาร่าเก็บไฟล์ Excel ไว้  
 
 # Declare variables for calculation
 variables = ["t", "h", "pr", "u", "vr", "s"]
@@ -22,7 +22,7 @@ if 1 <= data <= 6:
         #Todo: เอาสูตรเข้ามาคำนวณ
     else:
         print(values)
-        #Todo ลบให้output ไม่แสดง row(ไม่ทำก็ได้)
+        #Todo: ลบให้output ไม่แสดง row(ไม่ทำก็ได้)
 else:
     print("Wrong input")
 
