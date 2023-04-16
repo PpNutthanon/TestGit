@@ -1,5 +1,4 @@
 # Import excel sheet into python
-import numpy as np
 import pandas as pd
 df = pd.read_excel(r"Sahara\TableA17.xlsx")
 #print(df)
@@ -20,7 +19,7 @@ if data == 1:
         #Todo: เอาสูตรเข้ามาคำนวณ
     else:
         print(values)
-        #Todo ลบให้output ไม่แสดง row 0 
+        #Todo ลบให้output ไม่แสดง row 
 
 
 elif data == 2:
@@ -61,7 +60,6 @@ elif data == 5:
 
 elif data == 6: 
     s = float(input("Enter s value: "))
-    pr = float(input("Enter Pr value: "))
     values = df.loc[df[variables[data-1]] == s]
     if len(values) == 0:
         print("Required Equation")
