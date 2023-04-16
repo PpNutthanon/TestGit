@@ -1,6 +1,6 @@
 # Import excel sheet into python
 import pandas as pd
-df = pd.read_excel(r"TableA17.xlsx")
+df = pd.read_excel(r"Sahara\TableA17.xlsx")
 #print(df)
 
 #* Declare variables for calculation

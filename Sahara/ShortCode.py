@@ -19,8 +19,10 @@ if 1 <= data <= 6:
     values = find_values(data)
     if len(values) == 0:
         print("Required Equation")
+        #Todo: เอาสูตรเข้ามาคำนวณ
     else:
         print(values)
+        #Todo ลบให้output ไม่แสดง row(ไม่ทำก็ได้)
 else:
     print("Wrong input")
 
