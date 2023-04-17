@@ -43,8 +43,7 @@ if 1 <= data <= 6:
             interpolated = values_less[i] + (ratio * (values_greater[i] - values_less[i]))
             interpolated_values.append(round(interpolated,3))
         print(interpolated_values)
-        #? Error ตรงที่ Vr ไม่ Exact Value เอามาคำนวณแล้วได้ค่าแปลกๆ
-        #Todo (tb - tl)/(tg-tl) = (x - tl)/(tg-tl)
+        #! Error ตรงที่กรอกค่า Vr ที่ไม่ตรงกลับตาราง แล้วตารางโชว์ Row Before = Rowแรก และ Row After = Rowสุดท้าย ไม่ได้แสดงค่าที่ถูกจริงๆ
     else:
         print("Exact match found:")
         print(exact_values)
