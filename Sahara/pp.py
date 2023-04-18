@@ -9,20 +9,22 @@ for i, var in enumerate(variables, 1):
     print(f" [{i}] : {var.upper()}")
 
 def find_values(var_index, input_value):
-    less_than_mask = df[variables[var_index-1]] < input_value
-    greater_than_mask = df[variables[var_index-1]] > input_value
+    sorted_df = df.sort_values(by=variables[var_index-1])
+    
+    less_than_mask = sorted_df[variables[var_index-1]] < input_value
+    greater_than_mask = sorted_df[variables[var_index-1]] > input_value
     
     if less_than_mask.any():
-        closest_less_than = df[less_than_mask].iloc[-1]
+        closest_less_than = sorted_df[less_than_mask].iloc[-1]
     else:
         closest_less_than = None
         
     if greater_than_mask.any():
-        closest_greater_than = df[greater_than_mask].iloc[0]
+        closest_greater_than = sorted_df[greater_than_mask].iloc[0]
     else:
         closest_greater_than = None
         
-    exact_match = df[df[variables[var_index-1]] == input_value]
+    exact_match = sorted_df[sorted_df[variables[var_index-1]] == input_value]
     return exact_match, closest_less_than, closest_greater_than
 
 data = int(input("Enter variables you want to input: "))
