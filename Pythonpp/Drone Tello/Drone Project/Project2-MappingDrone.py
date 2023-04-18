@@ -1,6 +1,6 @@
 from djitellopy import tello
 
-import Keypress as kp
+import KeyPressModule as kp
 
 import numpy as np
 
