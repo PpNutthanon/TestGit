@@ -15,7 +15,7 @@ def find_values(var_index, input_value):
     less_than_mask = sorted_df[variables[var_index-1]] < input_value
     greater_than_mask = sorted_df[variables[var_index-1]] > input_value
     
-    if less_than_mask.any(): #* เอาค่า True ใน less_than_mask มาใช้
+    if less_than_mask.any(): #* Bring Boolean:True in less_than_mask for calculation
         closest_less_than = sorted_df[less_than_mask].iloc[-1] 
     else:
         closest_less_than = None
