@@ -55,8 +55,12 @@ print(variables)
 
 #Todo: We start step3 here
 #* Range of Pr = [0.3363, 3464]
-#? ค่า rp คือค่าอะไร (0,10300)
-r = float(input("Enter values of r: "))
+#! Conditions Range of Rp
+if 3464/interpolated_values[2] > 902.58:
+    print("\n**** The range of Rp should be","[",round(0.3363/interpolated_values[2],3),",","902.58","] ****")
+else:
+    print("\n**** The range of Rp should be","[",round(0.3363/interpolated_values[2],3),",",round(3464/interpolated_values[2],3),"] ****")
+r = float(input("Enter values of Rp: "))
 Prandtl_number2 = r * interpolated_values[2]
 
 
@@ -86,18 +90,25 @@ else:
     pr_interpolated_values = pr_values.iloc[0].tolist()
     print(pr_interpolated_values)
     
-compressor_efficiency  = float(input("Enter compressor efficiency(%):"))/100
-H2A = interpolated_values[1] + ((pr_interpolated_values[1] - interpolated_values[1])/ compressor_efficiency)
 
-#Todo: Declare constant H3 and Pr3 = f(1273) in Kelvin
-H3, Prandtl_number3 = 1363.948, 303.54 
+#Todo: Declare constant H3 and Pr3 = f(1273) in Kelvin ; TIT = 1000 celcius degree
+H3, Prandtl_number3 = 1363.948, 303.54
+
+#! Not Finish and Not Complete on the way to find the range
+if pr_interpolated_values[1] - interpolated_values[1] < 0:
+    print("Compressor Efficiency should more than: ",((H3-interpolated_values[1])/(pr_interpolated_values[1]-interpolated_values[1]))*100,"%")
+elif pr_interpolated_values[1] - interpolated_values[1] > 0:
+    print("Compressor Efficiency should less than: ",((H3-interpolated_values[1])/(pr_interpolated_values[1]-interpolated_values[1]))*100,"%")
+
+compressor_efficiency  = float(input("Enter compressor efficiency(%):"))/100
+H2A = interpolated_values[1] + ((pr_interpolated_values[1] - interpolated_values[1])/ compressor_efficiency) 
 qin = H3 - H2A
 Prandtl_number4 = Prandtl_number3 / r #! The range of Rp should be [0.087, 902.58]
 
 #Todo: Bring Values of Pr to calculate for the 4th time in order to find T4 and H4
 pr4_values, pr4_values_less, pr4_values_greater = find_values(pr_index, Prandtl_number4)
 
-if len(pr_values) == 0:
+if len(pr4_values) == 0:
     print("\nNo exact match found for Prandtl_number4. Closest values:")
 
     if pr4_values_less is not None:
@@ -126,11 +137,11 @@ turbine_work    = H4A - H3
 thermal_efficiency = qin / (turbine_work - compressor_work)
 print("\nThermal Efficiency: ",round(thermal_efficiency,3)) 
 
-#? ต้องหาช่วงของ Rp ที่ทำให้โปรแกรมแสดงค่าที่อยู่ในช่วงของตารางให้ได้
+#? Thermal Efficiency ติดลบไม่ได้ แต่บางครั้ง run program แล้วได้ค่าติดลบ
+#! Find suitable range for compressor_efficiency and turbine_efficiency   
 
 
 #Todo: H2A => State2 Actual ()
-#Todo: Still find the range of Rp 
 # 1 = อากาศภายนอก
 # 2 = อัดขึ้นไป 
 # s= isentopic
