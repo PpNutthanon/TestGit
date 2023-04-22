@@ -37,8 +37,6 @@ if 1 <= data <= 6:
     
     if len(exact_values) == 0:
         print("No exact match found. Closest values:")
-        print("\nRow before:", values_less)
-        print("\nRow after:", values_greater)
         values_less   = values_less.tolist()
         values_greater = values_greater.tolist()
         interpolated_values = []
@@ -49,10 +47,90 @@ if 1 <= data <= 6:
         print(interpolated_values)
     else:
         print("Exact match found:")
-        print(exact_values)
+        interpolated_values = exact_values.iloc[0].tolist()
+        print(interpolated_values)
 else:
     print("Wrong input")
-
 print(variables)
 
-#Todo: Step3
+#Todo: We start step3 here
+#* Range of Pr = [0.3363, 3464]
+#? ค่า rp คือค่าอะไร (0,10300)
+r = float(input("Enter values of r: "))
+Prandtl_number2 = r * interpolated_values[2]
+
+
+# Call find_values function to check the value of Pr in the Excel sheet
+pr_index = 3  # index of Pr in the variables list
+pr_values, pr_values_less, pr_values_greater = find_values(pr_index, Prandtl_number2)
+
+if len(pr_values) == 0:
+    print("\nNo exact match found for Prandtl_number2. Closest values:")
+
+    if pr_values_less is not None:
+        pr_values_less = pr_values_less.tolist()
+    if pr_values_greater is not None:
+        pr_values_greater = pr_values_greater.tolist()
+
+    pr_interpolated_values = []
+    if pr_values_less is not None and pr_values_greater is not None:
+        pr_ratio = (Prandtl_number2 - pr_values_less[pr_index-1])/(pr_values_greater[pr_index-1] - pr_values_less[pr_index-1])
+        for i in range(len(variables)):
+            pr_interpolated = pr_values_less[i] + (pr_ratio * (pr_values_greater[i] - pr_values_less[i]))
+            pr_interpolated_values.append(round(pr_interpolated, 3))
+    else:
+        pr_interpolated_values = pr_values_less if pr_values_less is not None else pr_values_greater
+    print(pr_interpolated_values)
+else:
+    print("\nExact match found for Prandtl_number2:")
+    pr_interpolated_values = pr_values.iloc[0].tolist()
+    print(pr_interpolated_values)
+    
+compressor_efficiency  = float(input("Enter compressor efficiency(%):"))/100
+H2A = interpolated_values[1] + ((pr_interpolated_values[1] - interpolated_values[1])/ compressor_efficiency)
+
+#Todo: Declare constant H3 and Pr3 = f(1273) in Kelvin
+H3, Prandtl_number3 = 1363.948, 303.54 
+qin = H3 - H2A
+Prandtl_number4 = Prandtl_number3 / r #! The range of Rp should be [0.087, 902.58]
+
+#Todo: Bring Values of Pr to calculate for the 4th time in order to find T4 and H4
+pr4_values, pr4_values_less, pr4_values_greater = find_values(pr_index, Prandtl_number4)
+
+if len(pr_values) == 0:
+    print("\nNo exact match found for Prandtl_number4. Closest values:")
+
+    if pr4_values_less is not None:
+        pr4_values_less = pr4_values_less.tolist()
+    if pr4_values_greater is not None:
+        pr4_values_greater = pr4_values_greater.tolist()
+
+    pr4_interpolated_values = []
+    if pr4_values_less is not None and pr4_values_greater is not None:
+        pr4_ratio = (Prandtl_number4 - pr4_values_less[pr_index-1])/(pr4_values_greater[pr_index-1] - pr4_values_less[pr_index-1])
+        for i in range(len(variables)):
+            pr4_interpolated = pr4_values_less[i] + (pr4_ratio * (pr4_values_greater[i] - pr4_values_less[i]))
+            pr4_interpolated_values.append(round(pr4_interpolated, 3))
+    else:
+        pr4_interpolated_values = pr4_values_less if pr4_values_less is not None else pr4_values_greater
+    print(pr4_interpolated_values)
+else:
+    print("\nExact match found for Prandtl_number4:")
+    pr4_interpolated_values = pr4_values.iloc[0].tolist()
+    print(pr4_interpolated_values)
+
+turbine_efficiency = float(input("Enter turbine efficiency(%): "))/100
+H4A = H3 - (turbine_efficiency*(H3 - pr4_interpolated_values[1]))
+compressor_work = H2A - interpolated_values[1]
+turbine_work    = H4A - H3
+thermal_efficiency = qin / (turbine_work - compressor_work)
+print("\nThermal Efficiency: ",round(thermal_efficiency,3)) 
+
+#? ต้องหาช่วงของ Rp ที่ทำให้โปรแกรมแสดงค่าที่อยู่ในช่วงของตารางให้ได้
+
+
+#Todo: H2A => State2 Actual ()
+#Todo: Still find the range of Rp 
+# 1 = อากาศภายนอก
+# 2 = อัดขึ้นไป 
+# s= isentopic
