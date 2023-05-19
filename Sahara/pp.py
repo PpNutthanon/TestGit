@@ -75,7 +75,7 @@ pr_values, pr_values_less, pr_values_greater = find_values(pr_index, Prandtl_num
 #Todo: Write the same prompt but change variables_name and date=3(Pr)
 
 if len(pr_values) == 0:
-    print("\nNo exact match found for Prandtl_number2. Closest values:")
+    print("\nNo exact match found for Pr2. Closest values:")
 
     if pr_values_less is not None:
         pr_values_less = pr_values_less.tolist()
@@ -92,28 +92,19 @@ if len(pr_values) == 0:
         pr_interpolated_values = pr_values_less if pr_values_less is not None else pr_values_greater
     print(pr_interpolated_values)
 else:
-    print("\nExact match found for Prandtl_number2:")
+    print("\nExact match found for Pr2:")
     pr_interpolated_values = pr_values.iloc[0].tolist()
     print(pr_interpolated_values)
-
-print(pr_interpolated_values)
     
 
 #Todo: Declare constant H3 and Pr3 = f(1273) in Kelvin ; TIT = 1000 celcius degree = 1273 kelvin (เอาค่า T=1273 ไป interpolated)
 H3, Prandtl_number3 = 1277.79, 238
 
-#! Not Finish and Not Complete on the way to find the range
-#Todo: Declare compressor efficiency range in order to make qin is positive so consequent make thermal efficieny be positive
-if pr_interpolated_values[1] - interpolated_values[1] < 0:
-    print("Compressor Efficiency should more than: ",((H3-interpolated_values[1])/(pr_interpolated_values[1]-interpolated_values[1]))*100,"%")
-elif pr_interpolated_values[1] - interpolated_values[1] > 0:
-    print("Compressor Efficiency should less than: ",((H3-interpolated_values[1])/(pr_interpolated_values[1]-interpolated_values[1]))*100,"%")
-
 compressor_efficiency  = 0.8
 H2A = interpolated_values[1] + ((pr_interpolated_values[1] - interpolated_values[1])/ compressor_efficiency) 
 qin = H3 - H2A
-print("H2A=",H2A) 
-print("qin=",qin)
+print("H2A=",round(H2A,3))
+print("qin=",round(qin,3))
 
 Prandtl_number4 = Prandtl_number3 / r #! The range of Rp should be [0.087, 902.58]
 
@@ -121,7 +112,7 @@ Prandtl_number4 = Prandtl_number3 / r #! The range of Rp should be [0.087, 902.5
 pr4_values, pr4_values_less, pr4_values_greater = find_values(pr_index, Prandtl_number4)
 
 if len(pr4_values) == 0:
-    print("\nNo exact match found for Prandtl_number4. Closest values:")
+    print("\nNo exact match found for Pr4. Closest values:")
 
     if pr4_values_less is not None:
         pr4_values_less = pr4_values_less.tolist()
@@ -138,27 +129,22 @@ if len(pr4_values) == 0:
         pr4_interpolated_values = pr4_values_less if pr4_values_less is not None else pr4_values_greater
     print(pr4_interpolated_values)
 else:
-    print("\nExact match found for Prandtl_number4:")
+    print("\nExact match found for Pr4:")
     pr4_interpolated_values = pr4_values.iloc[0].tolist()
     print(pr4_interpolated_values)
 
 turbine_efficiency = 0.8
 H4A = H3 - (turbine_efficiency*(H3 - pr4_interpolated_values[1]))
-print("H4A=",H4A)
+print("H4A=",round(H4A,3),"\n")
 compressor_work = H2A - interpolated_values[1]
 turbine_work    = H3 - H4A
 thermal_efficiency = (turbine_work - compressor_work) / qin 
-print("\nThermal Efficiency: ",round(thermal_efficiency,3)*100,"%") 
+print("compressor_work:",round(compressor_work,3))
+print("Turbine_work:",round(turbine_work,3))
+print("\nThermal Efficiency: ",round(thermal_efficiency*100,3),"%") 
 
-#? Thermal Efficiency ติดลบไม่ได้ แต่บางครั้ง run program แล้วได้ค่าติ11ดลบ
-#! Find suitable range for isentropic_efficiency and turbine_efficiency   
 
-
-#Todo: H2A => State2 Actual ()
-# 1 = อากาศภายนอก
-# 2 = อัดขึ้นไป 
-# s= isentopic
-#Todo: แกน X => RPp , แกน Y => Thermal efficiency
+#Todo: Plot Graph Thermal Efficiency Vs Rp
 x = [3,4,5,6,7,8,9,10,11,12,13,14,15]
 y = [15.2, 17.8, 19.5, 20.59, 21.2, 21.6, 21.8, 21.8, 21.7, 21.6, 21.5, 20.59, 20.59]
 plt.xlabel("Pressure Ratio")
@@ -166,10 +152,3 @@ plt.ylabel("Thermal Efficiency")
 print(plt.plot(x,y))
 plt.show()
 
-
-# T-S Graph => y=T, x=S(Entropy)  T1, T2, T3, T4 at Rp=0.287
-#Todo: P1 =P4 , P2=P3 กำหนดให้ s1 = 0, P2=900, P1=100, R=9
-#* s1 =0, คู่กับ T1
-#* 1=>2 = R ln P2/P1 ใช้กับ T2
-#* 2=>3 = R ln P3/p2
-#* 3=>4 = R ln P4/P3
