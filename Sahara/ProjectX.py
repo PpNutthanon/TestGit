@@ -58,4 +58,4 @@ if P2 == 160:
 #TODO: หา H โดยการ Interpolated HกับP
 
 
-#ขั้นตอนแรกสุดให้ดูตาราง หา S => A13 ตามค่า Pressure ที่ได้ หา H => A12 ตามค่า Pressure 
+#ขั้นตอนแรกสุดให้ดูตาราง หา S => A13 ตามค่า Pressure ที่ได้ หา H => A12 ตามค่า Pressures
